@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Video Library</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font (from the provided page) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lora Font (from the provided page for headings) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (Social Media, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="https://placehold.co/40x40/047857/ffffff?text=HM">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+            overflow-x: hidden; /* Prevent horizontal scroll during animations */
+            background-image: url(./assets/images/sincerely-media-UWdTDa1Z9DM-unsplash.jpg); background-position: center;background-size: cover;
+
+        }
+
+
+        /* Custom Keyframe Animations for page/element transitions */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        @keyframes slideUpFadeIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up-fade {
+            animation: slideUpFadeIn 0.8s ease-out forwards;
+        }
+
+       
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        
+
+        /* Styles for the dropdown submenu */
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #fff; /* White background for dropdown */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 0.5rem 0;
+            top: calc(100% + 5px); /* Position below the parent link */
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            display: block; /* Show on hover or when active class is applied by JS */
+        }
+
+        .dropdown-menu a {
+            color: #4a5568; /* Dark gray text */
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #e2e8f0; /* Light gray hover */
+        }
+
+        /* Default colors are set by Tailwind, override for specific elements */
+        .header-bg {
+            background-color: #ffffff; /* White header */
+        }
+        .main-accent {
+            color: #047857; /* Teal 600 for main accents/icons */
+        }
+        .btn-primary {
+            background-color: #047857; /* Teal 600 for primary buttons */
+            color: white;
+        }
+        
+        .section-bg-light {
+            background-color: #ffffff; /* White section background */
+        }
+        .section-bg-accent {
+            background-color: #ecfdf5; /* Lightest teal for sections like features */
+            /* Matched box-shadow from aerobic-meditation-page's .section-card */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .text-primary {
+            color: #1a202c; /* Dark text for headings */
+        }
+        .text-secondary {
+            color: #4a5568; /* Slightly lighter text for paragraphs */
+        }
+        .footer-bg {
+            background-color:#047857;            
+            color: #cbd5e0; /* Light text for footer */
+        }
+        .footer-link-hover:hover {
+            color: #ffffff;
+        }
+        .nav-link-hover:hover {
+            color: #047857; /* Teal 600 for nav link hover */
+        }
+
+        /* Hero Background for Videos Page (Adapted from Meditation hero) */
+     .hero-background {
+            background-image: url('./assets/images/runze-shi-1kIyfRdLMxI-unsplash.jpg'); /* Calming green/teal tone */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Initial hidden state for elements to be animated on scroll */
+        .initial-hidden {
+            opacity: 0;
+        }
+        .animate-slide-up-fade {
+            animation: slideUpFadeIn 0.8s ease-out forwards;
+        }
+      
+
+
+        /* Video Card Styling (Adapted from Benefits/Types sections) */
+        .video-card {
+            background-color: #ffffff; /* White background */
+            padding: 1.5rem; /* Reduced padding slightly for more compact cards */
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 4px 10px rgb(7, 228, 7); /* Subtle shadow for cards */
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden; /* Ensure video corners are rounded */
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px); /* Reverted to original lift on hover */
+            box-shadow: 0 8px 25px rgb(12, 199, 106); /* Reverted to original prominent shadow on hover */
+        }
+
+        .video-thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            margin-bottom: 1rem; /* Space between video and title */
+            border-radius: 0.75rem; /* Match rounded-xl from card, but slightly smaller */
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgb(39, 231, 14);
+        }
+        .video-thumbnail-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-content-text {
+            flex-grow: 1; /* Allows text content to take up available space */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center text within card */
+        }
+
+        .video-content-text h3 {
+            font-size: 1.6rem; /* Adjust title size */
+            font-weight: 600;
+            color: #1a202c; /* Dark text */
+            margin-bottom: 0.5rem;
+            text-align: center; /* Ensure h3 inside video card is centered */
+        }
+        .video-content-text p {
+            font-size: 0.95rem;
+            color: #4a5568; /* Secondary text color */
+            margin-bottom: 1rem; /* Space before dos/don'ts */
+        }
+    .dos-donts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2em;
+            margin-top: 1.2em;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .dos-donts div {
+            flex: 1;
+            min-width: 100px;
+            padding: 1em;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+        .dos-donts .donts:hover {
+            transform: scale(1.01);
+            box-shadow: 0 2px 6px rgba(240, 60, 60, 0.884); /* Image shadow */
+        }
+        .dos-donts .dos:hover {
+            transform: scale(1.01);
+            box-shadow: 0 2px 6px rgba(74, 252, 68, 0.884); /* Image shadow */
+        }
+        .dos-donts .dos {
+            background-color: #cefdce;
+            box-shadow: 0 2px 3px rgba(112, 252, 107, 0.884); /* Image shadow */
+            border: 1px solid var(--accent-green);
+        }
+
+        .dos-donts .donts {
+            background-color: #ffe6e6;
+            border: 1px solid var(--accent-red);
+            box-shadow: 0 2px 3px rgba(255, 121, 98, 0.884); /* Image shadow */
+
+        }
+
+        .dos-donts ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .dos-donts ul li {
+            margin-bottom: 0.6em;
+            padding-left: 1.8em;
+            position: relative;
+            font-size: 0.95em;
+            color: var(--text-medium);
+            transition: color 0.2s ease;
+        }
+
+        .dos-donts .dos ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color:rgb(22, 221, 22);
+            font-weight: bold;
+        }
+
+        .dos-donts .donts ul li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color:red;
+            font-weight: bold;
+        }
+        .dos-donts .dos ul li:hover::before {
+            filter: brightness(0.8);
+        }
+        .dos-donts .donts ul li:hover::before {
+            filter: brightness(0.8);
+        }
+
+       
+
+        /* Generic Section Styling from provided HTML */
+        .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+        .container { width: 100%; margin-left: auto; margin-right: auto; background-color: none;  }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .rounded-xl { border-radius: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mb-8 { margin-bottom: 2rem; }
+
+        /* General Heading Styles */
+        h1, h2 { font-family: 'Lora', serif; text-align: center; } /* Ensure all h1 and h2 are centered */
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+
+        /* Adjustments for categories to use the new card layout */
+        .category-section h2 {
+            margin-top: 3.5rem; /* Spacing for category titles */
+            margin-bottom: 2rem;
+            position: relative; /* Needed for ::after pseudo-element */
+        }
+        .category-intro-text {
+            font-size: 1.1rem;
+            color: #4a5568;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto; /* Centered and spaced */
+        }
+
+        /* Video Grid Adaptation */
+        .video-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 2rem; /* Spacing between cards */
+        }
+
+        /* Footer */
+        .footer-bg {
+            background-color:#047857;             
+            color: #cbd5e0;
+        }
+        .footer-link-hover:hover {
+            color: #ffffff;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .videos-hero-background { min-height: 300px; }
+            .meditation-hero-background .bg-black { padding: 4; } /* Smaller padding for overlay */
+            h2 { font-size: 2rem; margin-top: 2.5rem; margin-bottom: 1.5rem; }
+            .header { padding: 3rem 1rem 2rem; }
+            .header p { font-size: 1.1rem; }
+            .video-grid-container {
+                grid-template-columns: 1fr; /* Single column on mobile */
+                gap: 1.5rem;
+            }
+            .video-card { padding: 1rem; }
+            .video-content-text h3 { font-size: 1.4rem; }
+            .video-content-text p { font-size: 0.9rem; }
+            .dos-donts-card-section { padding: 0.8rem; }
+            .dos-list, .donts-list { flex: 1 1 100%; text-align: center; } /* Stack dos/donts vertically */
+            .dos-list li, .donts-list li { padding-left: 0; text-indent: -1.5rem; padding-left: 1.5rem; margin: 0.2rem 0; }
+            .dos-list .item::before, .donts-list .item::before { left: 50%; transform: translateX(-50%) translateX(-20px); }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .header p { font-size: 0.95rem; }
+            .videos-hero-background { min-height: 250px; }
+            h2 { font-size: 1.8rem; }
+            .video-card { padding: 0.8rem; }
+            .video-content-text h3 { font-size: 1.2rem; }
+            .video-content-text p { font-size: 0.85rem; }
+            .dos-list li, .donts-list li { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation Bar -->
+    <header class="header-bg shadow-md py-4 sticky top-0 z-50 rounded-b-lg">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-primary rounded-lg">
+                <img src="https://placehold.co/40x40/047857/ffffff?text=HM" alt="Healthy Mind Logo" class="inline-block mr-2 rounded-full">
+                Healthy Mind
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Home</a>
+                <a href="about_us.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">About Us</a>
+
+                <!-- Poses Dropdown -->
+                <div class="relative dropdown">
+                    <button class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2 flex items-center">
+                        Poses
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="./poses_by_type.html" class="hover:bg-gray-100">By Type</a>
+                        <a href="./poses_by_benefit.html" class="hover:bg-gray-100">By Benefit</a>
+                        <a href="./general_poses.html" class="hover:bg-gray-100">General Poses</a>
+                        <a href="./poses_by_anatomy.html" class="hover:bg-gray-100">By Anatomy</a>
+                    </div>
+                </div>
+
+                <a href="courses.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Courses</a>
+                <a href="meditation.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Meditation</a>
+                <a href="videos.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Videos</a>
+                <a href="books.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Books</a>
+                <a href="contact.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-secondary hover:text-main-accent focus:outline-none rounded-lg p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-2 py-2 shadow-lg rounded-b-lg">
+            <a href="index.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Home</a>
+            <a href="about_us.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">About Us</a>
+
+            <div class="relative w-full">
+                <button class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2 w-full text-left flex justify-between items-center" id="mobile-poses-dropdown-toggle">
+                    Poses
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="mobile-dropdown-menu hidden bg-gray-50 py-2 rounded-lg mx-4 mt-1">
+                    <a href="./poses_by_type.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Type</a>
+                    <a href="./poses_by_benefit.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Benefit</a>
+                    <a href="./general_poses.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">General Poses</a>
+                    <a href="./poses_by_anatomy.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Anatomy</a>
+                </div>
+            </div>
+            <a href="courses.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Courses</a>
+            <a href="meditation.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Meditation</a>
+            <a href="videos.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Videos</a>
+            <a href="books.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Books</a>
+            <a href="contact.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Contact</a>
+        </div>
+    </header>
+     <main class="animate-fade-in">
+        <!-- Hero Section for Courses Page -->
+        <section class="hero-background h-64 flex items-center justify-center text-center px-4 py-10 bg-cover bg-center rounded-b-2xl">
+            <div class="bg-black bg-opacity-50 p-6 rounded-xl max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight animate-slide-up-fade">
+                Your Gateway to Guided Yoga Practice
+                </h1>
+            </div>
+        </section>
+        </main>
+
+        <!-- Main Content Wrapper -->
+        <div class="container mx-auto px-3 mt-8 mb-8">
+            <!-- Introduction Section -->
+            <section class="py-6 section-bg-light rounded-xl shadow-lg mb-8 initial-hidden"style="box-shadow: 0 4px 15px rgb(22, 221, 22); " data-animate="slide-up-fade" >
+                <div class="max-w-3xl mx-auto text-center content-section">
+                    <h2 class="text-4xl font-bold text-primary mb-8 initial-hidden" data-animate="slideUpFadeIn">Elevate Your Practice with Our Video Library</h2>
+                    <img src="./assets/images/video cover 3.jpg" alt="cover photo" class="content-image mx-auto mb-8 initial-hidden" data-animate="bounceIn">
+                   
+                    <p class="text-lg text-secondary leading-relaxed initial-hidden" data-animate="slide-up-fade" >
+                        Each video is thoughtfully designed to provide clear instructions, proper alignment cues, and modifications, ensuring a safe and effective practice right from your home.
+                    </p>
+                </div>
+            </section>
+            <!-- Beginner Friendly Section -->
+            <section class="py-16 section-bg-light rounded-xl shadow-lg mb-8 initial-hidden"style="box-shadow: 0 4px 15px rgb(22, 221, 22)" data-animate="slide-up-fade">
+                <div class="max-w-6xl mx-auto content-section">
+                    <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.1s;">Beginner Friendly</h2>
+                    <p class="category-intro-text initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.2s;">Start your yoga journey with foundational sequences focusing on basic poses and mindful breathing. Build confidence and understanding.</p>
+                    <div class="video-grid-container">
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/warmup1.webm" frameborder="0" allow="accelerometer; autoplay;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Pelvic Tilts</h3>
+                                <p>This subtle yoga warm-up pose helps warm up the spine and eases stiffness. <br><br></p>
+                                 <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                        <li class="item">Listen to your body.</li>
+                                        <li class="item">Breathe deeply.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                        <li class="item">Force stretches.</li>
+                                        <li class="item">Rush poses.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/warmup2.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text" >
+                                <h3>Leg Stretch</h3>
+                                <p>It build a strong and safe practice from the ground up, ensuring a solid foundation for future progress.</p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                        <li>Use props if needed.</li>
+                                            <li>Focus on alignment.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                         <li>Ignore discomfort.</li>
+                                            <li>Overstretch.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/warmup3.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Easy Twist</h3>
+                                <p>Connect breath to movement in this introductory Vinyasa flow. <br><br></p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                       <li >Maintain focus.</li>
+                                            <li >Steady breath.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                       <li >Push too hard.</li>
+                                            <li >Lose rhythm.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Intermediate & Advanced Section
+            <section class="py-16 section-bg-light rounded-xl shadow-lg mb-8 initial-hidden" data-animate="slide-up-fade"style="animation-delay: 0.6s;">
+                <div class="max-w-6xl mx-auto content-section">
+                    <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.7s;">Intermediate & Advanced</h2>
+                    <p class="category-intro-text initial-hidden" data-animate="slideUpFadeIn" style="animation-delay: 0.8s;">Challenge your limits and refine your technique with dynamic and complex sequences, including inversions and arm balances.</p>
+                    <div class="video-grid-container">
+                        <div class="video-card initial-hidden" data-animate="slideUpFadeIn" style="animation-delay: 0.9s;">
+                            <div class="video-thumbnail-container">
+                                <iframe src="https://www.youtube.com/embed/resources/videopreview.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Dynamic Power Flow (40 min)</h3>
+                                <p>Ignite your inner fire with a strong, full-body power flow designed to build strength and endurance, pushing your physical boundaries safely.</p>
+                                <div class="dos-donts-card-section">
+                                    <div class="dos-donts-list-container">
+                                        <ul class="dos-list">
+                                            <li class="item">Engage core.</li>
+                                            <li class="item">Maintain focus.</li>
+                                        </ul>
+                                        <ul class="donts-list">
+                                            <li class="item">Sacrifice form.</li>
+                                            <li class="item">Rush transitions.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.0s;">
+                            <div class="video-thumbnail-container">
+                                <iframe src="https://www.youtube.com/embed/resources/videopreview.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Arm Balance Workshop (30 min)</h3>
+                                <p>Break down the mechanics of popular arm balances and build the strength required to lift off, guiding you step-by-step.</p>
+                                <div class="dos-donts-card-section">
+                                    <div class="dos-donts-list-container">
+                                        <ul class="dos-list">
+                                            <li class="item">Warm up wrists.</li>
+                                            <li class="item">Practice safely.</li>
+                                        </ul>
+                                        <ul class="donts-list">
+                                            <li class="item">Force it.</li>
+                                            <li class="item">Be impatient.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.1s;">
+                            <div class="video-thumbnail-container">
+                                <iframe src="https://www.youtube.com/embed/resources/videopreview.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Deep Hip Opening Sequence (45 min)</h3>
+                                <p>Unlock tension in your hips and lower back with this extended, meditative hip-opening practice, promoting greater flexibility and emotional release.</p>
+                                <div class="dos-donts-card-section">
+                                    <div class="dos-donts-list-container">
+                                        <ul class="dos-list">
+                                            <li class="item">Use props for support.</li>
+                                            <li class="item">Breathe into sensation.</li>
+                                        </ul>
+                                        <ul class="donts-list">
+                                            <li class="item">Ignore sharp pain.</li>
+                                            <li class="item">Rush release.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+
+            <!-- Yoga for Specific Goals Section -->
+            <!-- <section class="py-16 section-bg-accent rounded-xl shadow-lg mb-8 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.2s;">
+                <div class="max-w-6xl mx-auto content-section">
+                    <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.3s;">Yoga for Specific Goals</h2>
+                    <p class="category-intro-text initial-hidden" data-animate="slideUpFadeIn" style="animation-delay: 1.4s;">Target specific areas of your body or mind with focused yoga practices for flexibility, strength, back health, and more.</p>
+                    <div class="video-grid-container">
+                        <div class="video-card initial-hidden" data-animate="slideUpFadeIn" style="animation-delay: 1.5s;">
+                            <div class="video-thumbnail-container">
+                                <iframe src="https://www.youtube.com/embed/resources/videopreview.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Yoga for Back Pain Relief (20 min)</h3>
+                                <p>Gentle and therapeutic poses designed to alleviate discomfort and strengthen muscles supporting your spine.</p>
+                                <div class="dos-donts-card-section">
+                                    <div class="dos-donts-list-container">
+                                        <ul class="dos-list">
+                                            <li class="item">Move slowly.</li>
+                                            <li class="item">Support your spine.</li>
+                                        </ul>
+                                        <ul class="donts-list">
+                                            <li class="item">Push into pain.</li>
+                                            <li class="item">Arch excessively.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.6s;">
+                            <div class="video-thumbnail-container">
+                                <iframe src="https://www.youtube.com/embed/resources/videopreview.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Core Strength Yoga (25 min)</h3>
+                                <p>A dynamic flow focused on building a strong and stable core, essential for all yoga poses and daily life.</p>
+                                <div class="dos-donts-card-section">
+                                    <div class="dos-donts-list-container">
+                                        <ul class="dos-list">
+                                            <li class="item">Engage deep core.</li>
+                                            <li class="item">Breathe with effort.</li>
+                                        </ul>
+                                        <ul class="donts-list">
+                                            <li class="item">Strain your neck.</li>
+                                            <li class="item">Hold breath.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.7s;">
+                            <div class="video-thumbnail-container">
+                                <iframe src="https://www.youtube.com/embed/resources/videopreview.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Flexibility & Full Body Stretch (35 min)</h3>
+                                <p>Improve your range of motion and release stiffness with this comprehensive full-body stretching sequence.</p>
+                                <div class="dos-donts-card-section">
+                                    <div class="dos-donts-list-container">
+                                        <ul class="dos-list">
+                                            <li class="item">Relax into stretches.</li>
+                                            <li class="item">Hold for breath cycles.</li>
+                                        </ul>
+                                        <ul class="donts-list">
+                                            <li class="item">Bounce in poses.</li>
+                                            <li class="item">Overstretch joints.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
+
+            <!-- Yoga Styles Section -->
+            <section class="py-16 section-bg-light rounded-xl shadow-lg mb-8 initial-hidden" style="box-shadow: 0 4px 15px rgb(22, 221, 22);" data-animate="slide-up-fade" style="animation-delay: 1.8s;">
+                <div class="max-w-6xl mx-auto content-section">
+                    <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 1.9s;">Explore Yoga Styles</h2>
+                    <p class="category-intro-text initial-hidden" data-animate="slide-up-fade">Discover different traditions and approaches to yoga, from classic to contemporary practices to find your perfect fit.</p>
+                    <div class="video-grid-container">
+                        <div class="video-card initial-hidden" data-animate="none" >
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/Warrior2.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text" >
+                                <h3>Warrior II</h3>
+                                <p>It focusing on holding poses longer to build stability, strength, and body awareness.</p>
+                               <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                         <li >Hold poses mindfully.</li>
+                                            <li >Focus on breath.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                       <li >Rush into poses.</li>
+                                            <li >Distract yourself.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/ExtendedSide.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Extended Side Angle </h3>
+                                <p>It is the structured and energetic Yoga, building heat and discipline.</p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                        <li >Learn the sequence.</li>
+                                            <li >Maintain breath.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                        <li >Skip modifications.</li>
+                                            <li >Compare progress.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/halfmoon.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Half Moon</h3>
+                                <p>This target connective tissues and promote flexibility and calm.</p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                        <li >Breathe deeply</li>
+                                        <li>Use props</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                         <li >Push beyond edge.</li>
+                                        <li >Rush out.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Meditation & Restorative Category (adapted for video page) -->
+            <section class="py-16 section-bg-light rounded-xl shadow-lg mb-8 initial-hidden"style="box-shadow: 0 4px 15px rgb(22, 221, 22)" data-animate="slide-up-fade" style="animation-delay: 2.4s;">
+                <div class="max-w-6xl mx-auto content-section">
+                    <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade"style="animation-delay: 2.5s;">Meditations & Restorative</h2>
+                    <p class="category-intro-text initial-hidden" data-animate="slide-up-fade"style="animation-delay: 2.6s;">Find stillness and deep relaxation through guided meditations and profoundly restful poses to rejuvenate mind and body.</p>
+
+                    <div class="video-grid-container">
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/bowpose.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Bow Pose</h3>
+                                <p>Cultivate inner peace and clarity with this gentle guided meditation</p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                        <li >Find a quiet space.</li>
+                                         <li >Relax your body.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                       <li >Judge thoughts.</li>
+                                        <li>Strive for emptiness.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/Bridge.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Bridge Pose </h3>
+                                <p>Unwind and release tension with long-held and calm your nervous system .</p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                         <li >Start Slowly.<li>
+                                        <li >Breathe Mindfully.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                        <li>Feel any strain.</li>
+                                        <li >Rush out of poses.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="video-card initial-hidden" data-animate="none">
+                            <div class="video-thumbnail-container">
+                                <iframe src="./assets/videos/camelpose.webm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-content-text">
+                                <h3>Camel Pose</h3>
+                                <p>Camel is a nice option for people with tight shoulders for whom wheel pose is difficult</p>
+                                <div class="dos-donts">
+                                <div class="dos">
+                                    <ul>
+                                       <li >Breath normally.</li>
+                                        <li>Relax into stretches.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <ul>
+                                         <li>Avoid Rushing.</li>
+                                        <li >Don't Collapse.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    
+
+    <!-- Footer - Copied from provided HTML -->
+    <footer class="footer-bg py-8 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2023 Healthy Mind. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle - Copied from provided HTML
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile Poses Dropdown Toggle - Copied from provided HTML
+        const mobilePosesDropdownToggle = document.getElementById('mobile-poses-dropdown-toggle');
+        const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+
+        if (mobilePosesDropdownToggle && mobileDropdownMenu) {
+            mobilePosesDropdownToggle.addEventListener('click', () => {
+                mobileDropdownMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Close mobile menu when a link is clicked - Copied from provided HTML
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Handle desktop dropdown hover/click state (for accessibility) - Copied from provided HTML
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const dropdownButton = dropdown.querySelector('button');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+            if (dropdownButton) {
+                dropdownButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!dropdown.contains(event.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // Function to handle animations on scroll using Intersection Observer
+        const animateOnScroll = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const animateClass = target.dataset.animate;
+                        if (animateClass) {
+                            target.classList.remove('initial-hidden');
+                            target.classList.add(`animate-${animateClass}`);
+                        }
+                        observer.unobserve(target); // Stop observing once animated
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            document.querySelectorAll('.initial-hidden').forEach((element) => {
+                observer.observe(element);
+            });
+        };
+
+        // Run animations on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+    </script>
+</body>
+</html>

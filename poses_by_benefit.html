@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poses By Benefit</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://placehold.co/40x40/047857/ffffff?text=HM">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts for 'Inter' (sans-serif) and 'Merriweather' (serif) for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+       
+       
+       body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+            overflow-x: hidden; /* Prevent horizontal scroll during animations */
+            transition: background-color 0.3s ease; /* Smooth transition for theme change */
+            background-image: url(./assets/images/sincerely-media-UWdTDa1Z9DM-unsplash.jpg); background-position: center;background-size: cover;
+
+        }
+       
+
+
+
+
+
+
+/* Footer */
+.main-footer {
+    background: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 60px;
+    font-size: 0.9rem;
+}
+
+/* Animations for scroll-in effect */
+.initial-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.animate-slide-up-fade {
+    animation: slideUpFade 0.7s ease-out forwards;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Media Queries for Responsiveness */
+
+/* Tablets and smaller desktops */
+@media (max-width: 992px) {
+    .intro-text h2 {
+        font-size: 2rem;
+    }
+    .intro-text p {
+        font-size: 1rem;
+    }
+
+    .poses-grid {
+        grid-template-columns: 1fr; /* Stack columns vertically */
+        gap: 40px; /* Space between stacked form and details/map */
+    }
+
+   
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    
+
+    .poses-section {
+        padding: 30px 15px;
+        margin: 20px auto;
+    }
+
+    .intro-text h2 {
+        font-size: 1.8rem;
+    }
+
+}
+
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+    .intro-text h2 {
+        font-size: 1.5rem;
+    }
+    .intro-text p {
+        font-size: 0.9rem;
+    }
+
+}
+
+       
+        /* Applies initial animation to each distinct content block */
+        .initial-load-animation {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            opacity: 0; /* Start hidden for animation */
+        }
+
+
+
+       /* Custom Keyframe Animations for page/element transitions */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        @keyframes slideUpFadeIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+       .initial-load-animation {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            opacity: 0; /* Start hidden for animation */
+        }
+        /* Styles for the dropdown submenu */
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #fff; /* White background for dropdown */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 0.5rem 0;
+            top: calc(100% + 5px); /* Position below the parent link */
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            display: block; /* Show on hover or when active class is applied by JS */
+        }
+
+        .dropdown-menu a {
+            color: #4a5568; /* Dark gray text */
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #e2e8f0; /* Light gray hover */
+        }
+
+
+        .header-bg {
+            background-color: #ffffff; /* White header */
+        }
+        .main-accent {
+            color: #047857; /* Teal 600 for main accents/icons */
+        }
+      
+       
+        .section-bg-light {
+            background-color: #ffffff; /* White section background */
+        }
+        .section-bg-accent {
+            background-color: #ecfdf5; /* Lightest teal for sections like features */
+        }
+        .text-primary {
+            color: #1a202c; /* Dark text for headings */
+        }
+        .text-secondary {
+            color: #4a5568; /* Slightly lighter text for paragraphs */
+        }
+        .footer-bg {
+            background-color:#047857;
+            color: #cbd5e0; /* Light text for footer */
+        }
+        .footer-link-hover:hover {
+            color: #ffffff;
+        }
+        .nav-link-hover:hover {
+            color: #047857; /* Teal 600 for nav link hover */
+        }
+
+        /* Hero Background for Contact Page with Placeholder */
+        .poses-hero-background {
+            background-image: url('./assets/images/runze-shi-1kIyfRdLMxI-unsplash.jpg'); /* Calming green/teal tone */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+       
+        /* poses type */
+      
+
+      
+
+       
+        .section-intro {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5em;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 1.2s; /* After h3 animation */
+        }
+
+        strong {
+            color: #1d3557;
+        }
+
+        /* Layout & Containers */
+      
+
+        .poses_container {
+            max-width: 97%;
+            margin: 2em auto;
+            padding: 0 1em;
+            width: 90%;
+        }
+
+        .section-card {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2em;
+            opacity: 0; /* Initial state for fade-in animation */
+            transform: translateY(20px); /* Initial state for slide-up animation */
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        /* Delay animation for subsequent cards */
+        .section-card:nth-of-type(1) { animation-delay: 0.2s; }
+        .section-card:nth-of-type(2) { animation-delay: 0.4s; }
+        .section-card:nth-of-type(3) { animation-delay: 0.6s; }
+
+        /* New style for the full-length image */
+        .full-length-image {
+            display: block; /* Ensures it takes up its own line */
+            max-width: 70%; /* Ensures responsiveness */
+            height: 300px; /* Maintains aspect ratio */
+            border-radius: 10px;
+            margin: 1.5em auto 2.5em auto; /* Center image and add vertical spacing */
+            opacity: 0; /* Initial state for animation */
+            transform: scale(0.2);
+            animation: imagePopIn 1s ease-out forwards;
+            background-image:url(./assets/images/pose\ cover\ 8.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+     
+     
+
+       
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 1.3em;
+            }
+            h4 {
+                font-size: 1.1em;
+            }
+            .subsection {
+                padding-left: 1em;
+            }
+            .pose-item img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+     /* ****************************************************************************************************** */
+     
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            margin-bottom: 0.5em;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 5em;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 0.2em;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: fadeInScale 1s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        h2 {
+            font-size: 2.1em;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+            margin-top: 1.8em;
+            color: var(--primary-dark);
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInLeft 0.8s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        h3 {
+            font-size: 1.7em;
+            color: var(--primary-medium);
+            margin-top: 1.2em;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideInLeft 0.7s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        h4 {
+            font-size: 1.4em;
+            color: var(--text-dark);
+            margin-top: 1em;
+            margin-bottom: 0.7em;
+            letter-spacing: -0.01em;
+        }
+
+        h5 {
+            font-size: 1.15em;
+            color: var(--text-dark);
+            margin-top: 0.9em;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            font-size: 1em;
+        }
+
+        .section-intro {
+            font-size: 1.05em;
+            font-style: italic;
+            color: var(--text-medium);
+            margin-bottom: 1.5em;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+
+        strong {
+            color: var(--primary-medium);
+            font-weight: 600;
+        }
+
+   
+        /* Renamed from .container */
+        .content-wrapper {
+            max-width: 87%;
+            margin: 2.5em auto;
+            padding: 0 1.5em;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(10, 230, 94, 0.884); /* Image shadow */
+
+
+        }
+
+        /* Renamed from .section-card */
+        .category-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            padding-top: 20px;
+
+
+        }
+         .category-section h2
+        {
+            font-size: xx-large;
+            text-align: center;
+
+        }
+   
+
+        .subsection {
+            padding-left: 1.5em;
+            border-left: 4px solid var(--primary-light);
+            position: relative;
+            padding-bottom: 1em;
+            opacity: 0;
+            transform: translateY(20px);
+            text-align: justify;
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+
+        }
+        /* Subtle decorative line for subsection */
+        .subsection::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, var(--primary-light), transparent);
+            opacity: 0.7;
+            animation: stretchLine 1s ease-out forwards;
+        }
+
+       
+        .subsection p {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Styling for pose type groupings */
+        .pose-type-group {
+            margin-bottom: 2em;
+            padding: 1.5em;
+            background-color: var(--group-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 6px var(--shadow-light);
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInSlideUp 0.7s ease-out forwards;
+        }
+       
+
+        .pose-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2em;
+            background-color: var(--item-bg);
+            padding: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px var(--shadow-light);
+            gap: 1.5em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+            box-shadow: 0 4px 15px rgba(10, 230, 94, 0.884); /* Image shadow */
+
+        }
+     
+        .pose-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px var(--shadow-medium);
+            background-color: #dffce3;
+            box-shadow: 0 4px 15px rgb(230, 255, 6); /* Image shadow */
+      }
+
+        .pose-item img {
+            width: 100%;
+            height: 180px; /* Minimized height */
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 5px rgb(7, 230, 181);
+            opacity: 0;
+            transform: scale(0.9);
+            animation: imagePopIn 0.8s ease-out forwards;
+            transition: transform 0.3s ease, border-radius 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        .pose-item:hover img {
+            transform: scale(1.05);
+            border-radius: 12px;
+            border-color: var(--primary-light);
+            box-shadow: 0 8px 20px rgb(10, 231, 213);
+        }
+
+        .pose-content {
+            flex-grow: 1;
+            min-width: 250px;
+        }
+
+        .dos-donts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2em;
+            margin-top: 1.2em;
+            justify-content: center;
+        }
+
+        .dos-donts div {
+            flex: 1;
+            min-width: 200px;
+            padding: 1em;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+        .dos-donts .donts:hover {
+            transform: scale(1.01);
+            box-shadow: 0 2px 3px rgba(240, 60, 60, 0.884); /* Image shadow */
+        }
+        .dos-donts .dos:hover {
+            transform: scale(1.01);
+            box-shadow: 0 2px 3px rgba(74, 252, 68, 0.884); /* Image shadow */
+        }
+        .dos-donts .dos {
+            background-color: #cefdce;
+            box-shadow: 0 2px 3px rgba(112, 252, 107, 0.884); /* Image shadow */
+            border: 1px solid var(--accent-green);
+        }
+
+        .dos-donts .donts {
+            background-color: #ffe6e6;
+            border: 1px solid var(--accent-red);
+            box-shadow: 0 2px 3px rgba(255, 121, 98, 0.884); /* Image shadow */
+
+        }
+
+        .dos-donts ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .dos-donts ul li {
+            margin-bottom: 0.6em;
+            padding-left: 1.8em;
+            position: relative;
+            font-size: 0.95em;
+            color: var(--text-medium);
+            transition: color 0.2s ease;
+        }
+
+        .dos-donts .dos ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color:rgb(22, 221, 22);
+            font-weight: bold;
+        }
+
+        .dos-donts .donts ul li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color:red;
+            font-weight: bold;
+        }
+        .dos-donts .dos ul li:hover::before {
+            filter: brightness(0.8);
+        }
+        .dos-donts .donts ul li:hover::before {
+            filter: brightness(0.8);
+        }
+
+
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 2.2em 1em;
+            background-color: var(--primary-dark);
+            color: #e0f2f7;
+            margin-top: 3em;
+            font-size: 0.9em;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 2.5s;
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes imagePopIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes stretchLine {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.7em; }
+            h3 { font-size: 1.4em; }
+            h4 { font-size: 1.2em; }
+            h5 { font-size: 1.05em; }
+            p { font-size: 0.95em; }
+
+            .main-header { padding: 2em 1em; }
+            .category-section { padding: 1.5em; margin-bottom: 2em; }
+            .subsection { padding-left: 1em; margin-top: 1.5em; }
+            .pose-type-group { padding: 1em; margin-bottom: 1.5em; }
+            .pose-item { padding: 1.2em; margin-bottom: 1.8em; }
+            .pose-item img { margin-bottom: 1em; height: 160px; /* Adjusted height for mobile */ }
+            .dos-donts { gap: 0.8em; margin-top: 0.8em; }
+            .dos-donts div { padding: 0.8em; min-width: unset; width: 100%; }
+            .dos-donts ul { text-align: left; }
+            .dos-donts ul li { padding-left: 1.8em; }
+            .dos-donts ul li::before { left: 0; transform: none; top: 0.1em; } 
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.3em; }
+            h4 { font-size: 1.1em; }
+            .section-intro { font-size: 0.9em; }
+            .main-header p { font-size: 1.05em; }
+            .main-footer { font-size: 0.85em; padding: 1.8em 1em;}
+            .pose-item img { width: 100%; max-width: none; height: 140px; /* Further reduced height for very small screens */ }
+        }
+        .poses_image
+        {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="animate-fade-in">
+    <!-- Header/Navigation Bar -->
+    <header class="header-bg shadow-md py-4 sticky top-0 z-50 rounded-b-lg">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <a href="./index.html" class="text-2xl font-bold text-primary rounded-lg">
+                <img src="https://placehold.co/40x40/047857/ffffff?text=HM" alt="Healthy Mind Logo" class="inline-block mr-2 rounded-full">
+                Healthy Mind
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="./index.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Home</a>
+            <a href="about_us.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">About Us</a>
+
+                <!-- Poses Dropdown -->
+                <div class="relative dropdown">
+                    <button class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2 flex items-center">
+                        Poses
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="./poses_by_type.html"class="hover:bg-gray-100">By Type</a>
+                        <a href="./poses_by_benefit.html "class="hover:bg-gray-100">By Benefit</a>
+                        <a href="./general_poses.html "class="hover:bg-gray-100">General Poses</a>
+                        <a href="./poses_by_anatomy.html "class="hover:bg-gray-100">By Anatomy</a>
+                    </div>
+                </div>
+
+            <a href="courses.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Courses</a>
+            <a href="meditation.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Meditation</a>
+            <a href="videos.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Videos</a>
+            <a href="books.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Books</a>
+            <a href="contact.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Contact</a>
+        </div>
+ <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-secondary hover:text-main-accent focus:outline-none rounded-lg p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-2 py-2 shadow-lg rounded-b-lg">
+            <a href="index.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Home</a>
+            <a href="about_us.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">About Us</a>
+
+            <div class="relative w-full">
+                <button class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2 w-full text-left flex justify-between items-center" id="mobile-poses-dropdown-toggle">
+                    Poses
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+               <div class="mobile-dropdown-menu hidden bg-gray-50 py-2 rounded-lg mx-4 mt-1">
+                    <a href="./poses_by_type.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Type</a>
+                    <a href="./poses_by_benefit.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Benefit</a>
+                    <a href="./general_poses.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">General Poses</a>
+                    <a href="./poses_by_anatomy.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Anatomy</a>
+                </div>
+            </div>
+            <a href="courses.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Courses</a>
+            <a href="meditation.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Meditation</a>
+            <a href="videos.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Videos</a>
+            <a href="books.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Books</a>
+            <a href="contact.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Contact</a>
+        </div>
+        
+    </header>
+
+    <main class="animate-fade-in">
+         <!-- Hero Section for poses Page -->
+        <section class="poses-hero-background h-64 flex items-center justify-center text-center px-4 py-10 bg-cover bg-center rounded-b-2xl">
+            <div class="bg-black bg-opacity-50 p-6 rounded-xl max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight animate-slide-up-fade">
+                   Poses by Benefts <br>Enhance well-being with targeted poses.
+
+
+
+
+                </h1>
+            </div>
+        </section>
+ 
+
+    <!-- Main Content Area - poses Section -->
+   
+    <main class="poses_container">
+        <!-- Aerobic Poses Section -->
+        <section class="section-card">
+            <div class="full-length-image">
+
+            </div>
+            
+            <p style="text-align: center;">These Poses are designed to calm the nervous system, reduce tension, and promote a sense of inner peace. It leads to various health and wellness benefits.</p>
+            
+            </div>
+    </section>
+    </main>
+    
+<main class="content-wrapper">
+        <!-- Aerobic Poses by Type Section -->
+    
+            <div class="subsection">
+                <!-- HIIT Poses -->
+                 <section class="category-section">
+            <h2>Strength & Toning</h2></section>
+
+                <div class="pose-type-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8" >
+                    <div class="pose-item ">
+                        <img class="poses_image" src="./assets/images/poses by type/pose 11.jpg" alt="Burpee Pose" >
+                            <div class="pose-content">
+                            <h4>Plank Pose (Phalakasana)</h4>
+                            <p>A full-body strengthening pose that builds core stability, arm strength, and endurance. It engages nearly every muscle group.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Keep your body in a straight line from head to heels.</li>
+                                        <li>Engage your core and glutes.</li>
+                                        <li>Keep hands directly under shoulders.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Allow your hips to sag or pike up.</li>
+                                        <li>Lock your elbows.</li>
+                                        <li>Hold your breath.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pose-item">
+                        <img class="poses_image" src="./assets/images/poses by type/pose 12.jpg" alt="Burpee Pose" >
+                            <div class="pose-content">
+                            <h4>Chair Pose (Utkatasana)</h4>
+                            <p>Strengthens the thighs, ankles, calves, and spine. It also stretches the shoulders and chest, building heat and endurance.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Sink hips down as if sitting in a chair.</li>
+                                        <li>Keep knees behind toes (or aligned).</li>
+                                        <li>Lift arms actively.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Arch your lower back excessively.</li>
+                                        <li>Let your knees splay out or fall inward.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div></main>
+                <main class="content-wrapper">
+
+                <!-- Dance-Inspired Poses -->                   
+                    <section class="category-section">
+                   <h2>Leg & Glute Strengthening Poses</h2></section>
+                <div class="pose-type-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div class="pose-item ">
+                     <img class="poses_image" src="./assets/images/poses by type/pose 13.jpg" alt="Burpee Pose" >
+                            <div class="pose-content">
+                             <h4>Warrior II Pose (Virabhadrasana II)</h4>
+                            <p>Builds strength and endurance in the legs and core, while also opening the hips and chest. Improves focus and balance.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Align front knee over ankle.</li>
+                                        <li>Keep back leg strong and straight.</li>
+                                        <li>Extend arms actively from shoulders.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Lean forward over the front leg.</li>
+                                        <li>Allow front knee to collapse inward.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pose-item">
+                        <img class="poses_image" src="./assets/images/poses by type/pose 14.jpg" alt="Burpee Pose" >
+                            <div class="pose-content">
+                            <h4>Goddess Pose (Utkata Konasana)</h4>
+                            <p>Strengthens the core, thighs, and glutes while opening the hips and chest. Builds heat and empowers the practitioner.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Keep knees tracking over ankles.</li>
+                                        <li>Sink hips deeply, engaging glutes.</li>
+                                        <li>Maintain an upright, strong spine.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Let knees fall inward.</li>
+                                        <li>Lean too far forward.</li>
+                                        <li>Lock your knees on the way up.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div></main>
+                <main class="content-wrapper">
+
+                <!-- Cardio Sculpting Poses --> 
+               
+                    <section class="category-section">
+                    <h2>Calming & Grounding Poses</h2></section>
+                <div class="pose-type-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div class="pose-item">
+                        <img src="./assets/images/poses by type/pose 15.jpg" alt="Squat Jump Pose">
+                        <div class="pose-content">
+                            <h4>Happy Baby Pose (Ananda Balasana)</h4>
+                            <p>Gently stretches the hips, inner groins, and hamstrings while relieving lower back pain and calming the brain. <br><br></p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Hold the outer edges of your feet.</li>
+                                        <li>Keep your lower back pressed onto the mat.</li>
+                                        <li>Allow your hips to gently open.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Strain your neck.</li>
+                                        <li>Pull too hard on your feet.</li>
+                                        <li>Lift your lower back completely off the mat.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pose-item">
+                        <img src="./assets/images/poses by type/pose 16.jpg" alt="Lunge Jump Pose" >
+                        <div class="pose-content">
+                            <h4>Reclined Bound Angle Pose (Supta Baddha Konasana)</h4>
+                            <p>A restorative pose that gently opens the hips and groin, stimulates abdominal organs, and helps relieve stress and mild depression.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Support your knees with props (blankets, blocks) if needed.</li>
+                                        <li>Allow gravity to gently open your hips.</li>
+                                        <li>Relax your whole body, especially your jaw.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Force your knees toward the floor.</li>
+                                        <li>Strain your inner thighs.</li>
+                                        <li>Hold tension in your jaw or shoulders.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               </div></main>
+                <main class="content-wrapper">
+
+        <!-- Seated Meditation Poses -->   
+
+        <section class="category-section">
+            <h2>Flexibility & Mobility</h2></section>
+
+            
+
+                <div class="pose-type-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div class="pose-item">
+                        <img src="./assets/images/poses by type/pose 17.jpg" alt="Easy Pose">
+                        <div class="pose-content">
+                            <h4>Standing Forward Fold (Uttanasana)</h4>
+                            <p>Stretches the hamstrings, calves, and hips while strengthening the thighs and knees. Calms the brain and helps relieve stress.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Keep a micro-bend in your knees.</li>
+                                        <li>Lengthen spine on inhale, fold deeper on exhale.</li>
+                                        <li>Allow head and neck to relax.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Round your back excessively.</li>
+                                        <li>Lock your knees.</li>
+                                        <li>Force the stretch.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pose-item">
+                        <img src="./assets/images/poses by type/pose 18.jpg" alt="Lotus Pose" >
+                        <div class="pose-content">
+                            <h4>Pigeon Pose (Eka Pada Rajakapotasana variation)</h4>
+                            <p>A deep hip opener that stretches the outer hips, groin, and psoas. Can be intense, but highly effective for hip mobility.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Keep hips relatively even.</li>
+                                        <li>Use props (blankets/blocks) under hips if needed.</li>
+                                        <li>Breathe into the stretch.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Feel pain in the knee of the bent leg.</li>
+                                        <li>Force your body into position.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+                </div></main>
+                <main class="content-wrapper">
+
+                <!-- Supine (Lying Down) Meditation Poses -->                    
+                  <section class="category-section">
+                   <h2>Spine & Shoulder Flexibility Poses</h2></section>
+                   
+
+                <div class="pose-type-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <div class="pose-item">
+                        <img src="./assets/images/poses by type/pose 19.jpg" alt="Corpse Pose" >
+                        <div class="pose-content">
+                            <h4>Cat-Cow Pose (Marjaryasana-Bitilasana)</h4>
+                            <p>A gentle, flowing movement that warms up the spine and increases its flexibility. It also stretches the back torso and neck.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Coordinate movement with breath (inhale for Cow, exhale for Cat).</li>
+                                        <li>Move slowly and mindfully.</li>
+                                        <li>Keep wrists under shoulders, knees under hips.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Force the spine beyond its comfortable range.</li>
+                                        <li>Rush through the movement.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pose-item">
+                        <img src="./assets/images/poses by type/pose 20.jpg" alt="Legs Up the Wall Pose">
+                        <div class="pose-content">
+                            <h4>Thread the Needle Pose (Urdhva Mukha Pasasana)</h4>
+                            <p>A gentle twist and shoulder stretch that helps release tension in the upper back, shoulders, and neck, while also promoting spinal mobility.</p>
+                            <div class="dos-donts">
+                                <div class="dos">
+                                    <h5>Do's</h5>
+                                    <ul>
+                                        <li>Keep hips stacked over knees.</li>
+                                        <li>Rest on your shoulder and temple comfortably.</li>
+                                        <li>Breathe deeply into your upper back.</li>
+                                    </ul>
+                                </div>
+                                <div class="donts">
+                                    <h5>Don'ts</h5>
+                                    <ul>
+                                        <li>Force the stretch if you feel sharp pain.</li>
+                                        <li>Allow your hips to shift too far sideways.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            </div>
+
+        </section>
+    </main>
+
+    
+
+        
+
+
+        
+   
+    
+ <footer class="footer-bg py-8 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2023 Healthy Mind. All rights reserved.</p>
+
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Terms of Service</a>
+            </div>
+            
+        </div>
+    </footer>
+
+   <script>
+             const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile Poses Dropdown Toggle
+        const mobilePosesDropdownToggle = document.getElementById('mobile-poses-dropdown-toggle');
+        const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+
+        if (mobilePosesDropdownToggle && mobileDropdownMenu) {
+            mobilePosesDropdownToggle.addEventListener('click', () => {
+                mobileDropdownMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Handle desktop dropdown hover/click state (for accessibility)
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const dropdownButton = dropdown.querySelector('button');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+            if (dropdownButton) {
+                dropdownButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!dropdown.contains(event.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+   </script>
+</body>
+</html>

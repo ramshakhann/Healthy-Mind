@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Mind - Books</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (Social Media, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+            overflow-x: hidden; /* Prevent horizontal scroll during animations */
+            transition: background-color 0.3s ease; /* Smooth transition for theme change */
+            background-image: url(./assets/images/sincerely-media-UWdTDa1Z9DM-unsplash.jpg); background-position: center;background-size: cover;
+
+        }
+
+       
+
+        @keyframes scaleFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-scale-fade-in {
+            animation: scaleFadeIn 0.7s ease-out forwards;
+        }
+
+        /* Styles for the dropdown submenu */
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #fff; /* White background for dropdown */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 0.5rem 0;
+            top: calc(100% + 5px); /* Position below the parent link */
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            display: block; /* Show on hover or when active class is applied by JS */
+        }
+
+        .dropdown-menu a {
+            color: #4a5568; /* Dark gray text */
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #e2e8f0; /* Light gray hover */
+        }
+
+        /* Healthy Mind Theme - Green/Teal Palette */
+        /* Default colors are set by Tailwind, override for specific elements */
+        .header-bg {
+            background-color: #ffffff; /* White header */
+        }
+        .main-accent {
+            color: #047857; /* Teal 600 for main accents/icons */
+        }
+        .btn-primary {
+            background-color: #047857; /* Teal 600 for primary buttons */
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added base box-shadow */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Ensure transition covers transform */
+        }
+        .btn-primary:hover {
+            background-color: #065f46; /* Teal 700 on hover */
+            transform: translateY(-3px) scale(1.02); /* Lift and slight scale */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+        .section-bg-light {
+            background-color: #ffffff; /* White section background */
+        }
+        .section-bg-accent {
+            background-color: #ecfdf5; /* Lightest teal for sections like features */
+        }
+        .text-primary {
+            color: #1a202c; /* Dark text for headings */
+        }
+        .text-secondary {
+            color: #4a5568; /* Slightly lighter text for paragraphs */
+        }
+        .footer-bg {
+            background-color:#047857;
+            color: #cbd5e0; /* Light text for footer */
+        }
+        .footer-link-hover:hover {
+            color: #ffffff;
+        }
+        .nav-link-hover:hover {
+            color: #047857; /* Teal 600 for nav link hover */
+        }
+
+        /* Hero Background for Books Page with Placeholder */
+        .books-hero-background {
+            background-image: url('./assets/images/runze-shi-1kIyfRdLMxI-unsplash.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Initial hidden state for elements to be animated on scroll */
+        .initial-hidden {
+            opacity: 0;
+        }
+
+        /* Styling for individual book cards */
+        .book-card {
+            background-color: #fff;
+            border-radius: 0.75rem; /* Slightly smaller rounded corners */
+            box-shadow: 0 4px 10px rgba(7, 175, 63, 0.979);
+            padding: 1rem; /* Reduced padding */
+            text-align: center;
+            box-sizing: border-box;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease-in-out; /* Smoother transitions for all properties */
+
+        }
+        .book-card:hover {
+            box-shadow: 0 12px 28px rgba(14, 175, 49, 0.938); /* Deeper shadow */
+        }
+
+        /* Styling for book covers - width now matches card content width */
+        .book-card-image {
+            max-width: 100%;
+            width: 100%; /* Make width 100% of its parent (.book-card's content area) */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Ensure the whole image is visible, scale down if needed */
+            border-radius: 0.5rem; /* Smaller rounded corners */
+            margin: 0 auto 0.75rem; /* Reduced margin below */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* Smaller shadow for image */
+            display: block;
+
+
+        }
+        
+
+        .book-title {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #1a202c; /* text-primary */
+            margin-bottom: 0.25rem; /* Reduced margin */
+        }
+
+        .book-author {
+            font-size: 0.875rem; /* text-sm */
+            color: #4a5568; /* text-secondary */
+            margin-bottom: 0.75rem; /* Reduced margin */
+        }
+
+        .book-description {
+            font-size: 0.8125rem; /* text-xs */
+            color: #4a5568; /* text-secondary */
+            line-height: 1.4;
+            margin-bottom: 1rem; /* Adjusted margin */
+            flex-grow: 1; /* Allows description to take available space */
+            overflow: hidden; /* Hide overflow if text is too long */
+            text-overflow: ellipsis; /* Add ellipsis for long text */
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
+        /* Enhanced Read More Button Styling */
+        .read-more-btn {
+            background: linear-gradient(45deg, #047857, #065f46); /* Green gradient */
+            color: white;
+            padding: 0.6rem 1.2rem; /* Slightly increased padding for better touch target */
+            border-radius: 9999px; /* Full rounded/pill shape */
+            text-decoration: none;
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* Medium font weight */
+            border: 2px solid #047857; /* Solid border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+            transition: all 0.3s ease-in-out; /* Smooth transition for all properties */
+            display: inline-block; /* Allows padding and transformation */
+            letter-spacing: 0.05em; /* Small letter spacing */
+            text-transform: uppercase; /* Uppercase text */
+        }
+        .read-more-btn:hover {
+            background: linear-gradient(45deg, #065f46, #047857); /* Reverse gradient on hover */
+            transform: translateY(-2px) scale(1.05); /* Lift and slight scale on hover */
+            box-shadow: 0 8px 16px rgba(7, 196, 22, 0.692); /* Enhanced shadow on hover */
+            border-color: #065f46; /* Border color change on hover */
+        }
+        .read-more-btn:active {
+            transform: translateY(0); /* Press down effect */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Smaller shadow on active */
+        }
+
+
+        /* Specific animation delays for content within book cards */
+        .book-content-wrapper > *:nth-child(1) { animation-delay: 0.1s; } /* Image */
+        .book-content-wrapper > *:nth-child(2) { animation-delay: 0.2s; } /* Title */
+        .book-content-wrapper > *:nth-child(3) { animation-delay: 0.3s; } /* Author */
+        .book-content-wrapper > *:nth-child(4) { animation-delay: 0.4s; } /* Description */
+        .book-content-wrapper > *:nth-child(5) { animation-delay: 0.5s; } /* Button */
+
+        /* Added specific padding for the container to avoid edge issues on smaller screens */
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        /* Adjust grid columns for smaller cards */
+        @media (min-width: 768px) {
+            .book-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on medium screens */
+            }
+        }
+        @media (min-width: 1024px) {
+            .book-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 columns on large screens for more compactness */
+            }
+        }
+    </style>
+</head>
+<body class="animate-fade-in">
+    <!-- Header/Navigation Bar -->
+    <header class="header-bg shadow-md py-4 sticky top-0 z-50 rounded-b-lg">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-primary rounded-lg">
+                <img src="https://placehold.co/40x40/047857/ffffff?text=HM" alt="Healthy Mind Logo" class="inline-block mr-2 rounded-full">
+                Healthy Mind
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Home</a>
+                <a href="about_us.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">About Us</a>
+
+                <!-- Poses Dropdown -->
+                <div class="relative dropdown">
+                    <button class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2 flex items-center">
+                        Poses
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="./poses_by_type.html"class="hover:bg-gray-100">By Type</a>
+                        <a href="./poses_by_benefit.html "class="hover:bg-gray-100">By Benefit</a>
+                        <a href="./general_poses.html "class="hover:bg-gray-100">General Poses</a>
+                        <a href="./poses_by_anatomy.html "class="hover:bg-gray-100">By Anatomy</a>
+                    </div>
+                </div>
+
+                <a href="courses.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Courses</a>
+                <a href="meditation.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Meditation</a>
+                <a href="videos.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Videos</a>
+                <a href="books.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Books</a>
+                <a href="contact.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-secondary hover:text-main-accent focus:outline-none rounded-lg p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-2 py-2 shadow-lg rounded-b-lg">
+            <a href="index.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Home</a>
+            <a href="about_us.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">About Us</a>
+
+            <div class="relative w-full">
+                <button class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2 w-full text-left flex justify-between items-center" id="mobile-poses-dropdown-toggle">
+                    Poses
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="mobile-dropdown-menu hidden bg-gray-50 py-2 rounded-lg mx-4 mt-1">
+                    <a href="./poses_by_type.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Type</a>
+                    <a href="./poses_by_benefit.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Benefit</a>
+                    <a href="./general_poses.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">General Poses</a>
+                    <a href="./poses_by_anatomy.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Anatomy</a>
+                </div>
+            </div>
+            <a href="courses.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Courses</a>
+            <a href="meditation.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Meditation</a>
+            <a href="videos.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Videos</a>
+            <a href="books.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Books</a>
+            <a href="contact.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Contact</a>
+        </div>
+    </header>
+
+    <main class="animate-fade-in">
+        <!-- Hero Section for Books Page -->
+        <section class="books-hero-background h-64 flex items-center justify-center text-center px-4 py-10 bg-cover bg-center rounded-b-2xl">
+            <div class="bg-black bg-opacity-50 p-6 rounded-xl max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight animate-slide-up-fade">
+                    Expand Your Knowledge Explore Yoga Books
+                </h1>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section class="py-16 section-bg-light container mx-auto px-4 rounded-xl shadow-lg mt-8 mb-8">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-primary text-center mb-10 initial-hidden" data-animate="slide-up-fade">Recommended Yoga Literature</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 book-grid">
+                    <!-- Book Card 1 -->
+                    <div class="book-card rotate-shadow initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.1s;">
+                        <div class="book-content-wrapper">
+                            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRQuquv9G7bopmY7u3l-X_PhQHW9kjBOHYQlyJM0yu9MWXg8Hl-" alt="Yoga Anatomy" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">Mind Magic</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade"> James R. Doty MD</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                               The Neuroscience of Manifestation and How It Changes Everything
+                            </p>
+                            <a href="https://www.book2look.com/book/H12buIJHJu" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Book Card 2 -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.2s;">
+                        <div class="book-content-wrapper">
+                            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRdZT0K64jy4e-Iadf_CkYnP4nkQzogRyHtdzr1sOKlSgdGEyZb"alt="Light on Yoga" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">Meditations</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade">Marcus Aurelius</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                                It offers a series of challenging spiritual reflections and exercises . <br>
+                            </p>
+                            <a href="https://www.book2look.com/book/9780307569769&shoplinkNumbers=none&bookfeed=no" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Book Card 3 -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.3s;">
+                        <div class="book-content-wrapper">
+                            <img src="https://m.media-amazon.com/images/I/81ANaVZk5LL._SL1500_.jpg" alt="The Yoga Sutras of Patanjali" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">Atomic Habits</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade">James Clear</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                                Eessential for building healthy routines and lead to remarkable results.
+                            </p>
+                            <a href="https://www.book2look.com/book/9780593189641(eulenspiegelbuch.de)&shoplinkNumbers=none&bookfeed=no" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Book Card 4 -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.4s;">
+                        <div class="book-content-wrapper">
+                            <img src="https://m.media-amazon.com/images/I/71gxuHqAF-L._SL1500_.jpg"alt="The Heart of Yoga" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">The Breath</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade">James Nestor</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                                Explores the power of breath and how it can transform our health and mind.
+                            </p>
+                            <a href="https://www.book2look.com/book/9780593420218(eulenspiegelbuch.de)&shoplinkNumbers=none&bookfeed=no" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                     <!-- Book Card 5 (New) -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.5s;">
+                        <div class="book-content-wrapper">
+                            <img src="./assets/images/book 5.PNG" alt="Meditations from the Mat" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">The Mediator's Mind</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade">Bruce A, Edwards</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                                 It begins with a reflective process of envisioning ourselves as participants in the conflict <br>
+                            </p>
+                            <a href="https://edwardsmediationacademy.com/wp-content/uploads/2024/11/The-Mediators-Mind-eBook.pdf?mc_cid=357bc0612c&mc_eid=e475307dfa" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Book Card 6 (New) -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.6s;">
+                        <div class="book-content-wrapper">
+                            <img  src="https://m.media-amazon.com/images/I/61dSHZxYdtL._SL1500_.jpg"  alt="Living Your Yoga" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">The Untethered Soul</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade">JMichael A. Singer</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                                Explores ways of how to achieve peace and freedom by detaching from ego.
+                            </p>
+                            <a href="https://vinaire.me/wp-content/uploads/2022/06/the-untethered-soul-pdf.pdf" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                     <!-- Book Card 7 (New) -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.7s;">
+                        <div class="book-content-wrapper">
+                            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTOjIM0UtfRSst5MEE_dns1MCDWUqn4vqSIj5u3sI54raY9bq7r" alt="The Bhagavad Gita" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">The Promise of Mediation</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade">Joseph P. Folger and Robert A. Baruch Bush</p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                            It shows the theory and practice of conflict intervention. </p>
+                            <a href="https://books.google.com.jm/books?id=6rXrnAAACAAJ&printsec=frontcover&source=gbs_atb#v=onepage&q&f=false" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                    <!-- Book Card 8 (New) -->
+                    <div class="book-card initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.8s;">
+                        <div class="book-content-wrapper">
+                            <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTkvDFMAZb3q9nRkZGkMns9LaRxF-7uqQiEJzSSeJHvpl8_bVnq" alt="The Science of Yoga" class="book-card-image initial-hidden" data-animate-child="scale-fade-in">
+                            <h3 class="book-title initial-hidden" data-animate-child="slide-up-fade">The Miracle of Mindfulness</h3>
+                            <p class="book-author initial-hidden" data-animate-child="slide-up-fade"> Thich Nhat Hanh </p>
+                            <p class="book-description initial-hidden" data-animate-child="slide-up-fade">
+                            It helps in learning the skills of mindfulness--being awake and fully aware.
+                            </p>
+                            <a href="https://www.google.com.pk/books/edition/The_Miracle_of_Mindfulness/uSIRAAAAQBAJ?hl=en&gbpv=1&dq=The+Miracle+of+Mindfulness+Thich+Nhat+Hanh+read+book&printsec=frontcover" class="read-more-btn initial-hidden" data-animate-child="slide-up-fade" target="_blank">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Copied from other pages -->
+    <footer class="footer-bg py-8 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2023 Healthy Mind. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle - Copied from other pages
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile Poses Dropdown Toggle - Copied from other pages
+        const mobilePosesDropdownToggle = document.getElementById('mobile-poses-dropdown-toggle');
+        const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+
+        if (mobilePosesDropdownToggle && mobileDropdownMenu) {
+            mobilePosesDropdownToggle.addEventListener('click', () => {
+                mobileDropdownMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Close mobile menu when a link is clicked - Copied from other pages
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Handle desktop dropdown hover/click state (for accessibility) - Copied from other pages
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const dropdownButton = dropdown.querySelector('button');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+            if (dropdownButton) {
+                dropdownButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!dropdown.contains(event.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // Function to handle animations on scroll using Intersection Observer
+        const animateOnScroll = () => {
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const animationType = element.dataset.animate; // Animation for the parent card/section
+
+                        // Apply animation class for the parent element
+                        if (animationType === 'slide-up-fade') {
+                            element.classList.add('animate-slide-up-fade');
+                        }
+
+                        // Animate children within the current element or its content wrapper
+                        const childrenToAnimate = element.classList.contains('book-card') ?
+                            element.querySelectorAll('.book-content-wrapper > *') :
+                            element.querySelectorAll('[data-animate-child]'); // Fallback for other sections
+
+                        childrenToAnimate.forEach(child => {
+                            if (child.classList.contains('initial-hidden')) { // Only animate if not already animated
+                                const childAnimationType = child.dataset.animateChild || 'slide-up-fade'; // Default to slide-up-fade
+
+                                if (childAnimationType === 'slide-up-fade') {
+                                    child.classList.add('animate-slide-up-fade');
+                                } else if (childAnimationType === 'scale-fade-in') {
+                                    child.classList.add('animate-scale-fade-in');
+                                }
+                                child.classList.remove('initial-hidden');
+                            }
+                        });
+
+                        element.classList.remove('initial-hidden'); // Remove the initial hidden state for the parent
+                        observer.unobserve(element); // Stop observing once the element has animated
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all main sections and individual cards for animation
+            document.querySelectorAll('[data-animate], .book-card').forEach(element => {
+                // Ensure initial hidden state for all animatable elements
+                element.classList.add('initial-hidden');
+                if (element.classList.contains('book-card')) {
+                    element.querySelectorAll('.book-content-wrapper > *').forEach(child => {
+                        child.classList.add('initial-hidden');
+                    });
+                }
+                observer.observe(element);
+            });
+        };
+
+        // Call the animation function when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>

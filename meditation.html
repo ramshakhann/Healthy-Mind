@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Mind - Meditation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (Social Media, etc.) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="https://placehold.co/40x40/047857/ffffff?text=HM">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+            overflow-x: hidden; /* Prevent horizontal scroll during animations */
+            transition: background-color 0.3s ease; /* Smooth transition for theme change */
+            background-image: url(./assets/images/sincerely-media-UWdTDa1Z9DM-unsplash.jpg); background-position: center;background-size: cover;
+
+        }
+
+        /* Custom Keyframe Animations for page/element transitions */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+
+        @keyframes slideUpFadeIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up-fade {
+            animation: slideUpFadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+        .animate-bounce-in {
+            animation: bounceIn 0.8s ease-out forwards;
+        }
+
+        /* Styles for the dropdown submenu */
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #fff; /* White background for dropdown */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 0.5rem 0;
+            top: calc(100% + 5px); /* Position below the parent link */
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown.active .dropdown-menu {
+            display: block; /* Show on hover or when active class is applied by JS */
+        }
+
+        .dropdown-menu a {
+            color: #4a5568; /* Dark gray text */
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #e2e8f0; /* Light gray hover */
+        }
+
+        /* Default colors are set by Tailwind, override for specific elements */
+        .header-bg {
+            background-color: #ffffff; /* White header */
+        }
+        .main-accent {
+            color: #047857; /* Teal 600 for main accents/icons */
+        }
+        .btn-primary {
+            background-color: #047857; /* Teal 600 for primary buttons */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #065f46; /* Teal 700 on hover */
+        }
+        .section-bg-light {
+            background-color: #ffffff; /* White section background */
+        }
+        .section-bg-accent {
+            background-color: #ecfdf5; /* Lightest teal for sections like features */
+        }
+        .text-primary {
+            color: #1a202c; /* Dark text for headings */
+        }
+        .text-secondary {
+            color: #4a5568; /* Slightly lighter text for paragraphs */
+        }
+        .footer-bg {
+            background-color:#047857;             
+            color: #cbd5e0; /* Light text for footer */
+        }
+        .footer-link-hover:hover {
+            color: #ffffff;
+        }
+        .nav-link-hover:hover {
+            color: #047857; /* Teal 600 for nav link hover */
+        }
+
+        /* Hero Background for Meditation Page with Placeholder */
+        .meditation-hero-background {
+            background-image: url('./assets/images/runze-shi-1kIyfRdLMxI-unsplash.jpg'); /* Calming green/teal tone */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Initial hidden state for elements to be animated on scroll */
+        .initial-hidden {
+            opacity: 0;
+        }
+
+        /* Image styling for content sections */
+        .content-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Specific animation delays for content within sections */
+        .content-section > *:nth-child(1) { animation-delay: 0.1s; }
+        .content-section > *:nth-child(2) { animation-delay: 0.2s; }
+        .content-section > *:nth-child(3) { animation-delay: 0.3s; }
+        .content-section > *:nth-child(4) { animation-delay: 0.4s; }
+        .content-section > *:nth-child(5) { animation-delay: 0.5s; }
+        .content-section > *:nth-child(6) { animation-delay: 0.6s; }
+        .content-section > *:nth-child(7) { animation-delay: 0.7s; }
+        .content-section > *:nth-child(8) { animation-delay: 0.8s; }
+        .content-section > *:nth-child(9) { animation-delay: 0.9s; }
+        .content-section > *:nth-child(10) { animation-delay: 1.0s; }
+        .content-section > *:nth-child(11) { animation-delay: 1.1s; }
+        .content-section > *:nth-child(12) { animation-delay: 1.2s; }
+        .content-section > *:nth-child(13) { animation-delay: 1.3s; }
+        .content-section > *:nth-child(14) { animation-delay: 1.4s; }
+    </style>
+</head>
+<body class="animate-fade-in">
+    <!-- Header/Navigation Bar -->
+    <header class="header-bg shadow-md py-4 sticky top-0 z-50 rounded-b-lg">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-primary rounded-lg">
+                <img src="https://placehold.co/40x40/047857/ffffff?text=HM" alt="Healthy Mind Logo" class="inline-block mr-2 rounded-full">
+                Healthy Mind
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Home</a>
+                <a href="about_us.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">About Us</a>
+
+                <!-- Poses Dropdown -->
+                <div class="relative dropdown">
+                    <button class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2 flex items-center">
+                        Poses
+                        <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="./poses_by_type.html"class="hover:bg-gray-100">By Type</a>
+                        <a href="./poses_by_benefit.html "class="hover:bg-gray-100">By Benefit</a>
+                        <a href="./general_poses.html "class="hover:bg-gray-100">General Poses</a>
+                        <a href="./poses_by_anatomy.html "class="hover:bg-gray-100">By Anatomy</a>
+                    </div>
+                </div>
+
+                <a href="courses.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Courses</a>
+                <a href="meditation.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Meditation</a>
+                <a href="videos.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Videos</a>
+                <a href="books.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Books</a>
+                <a href="contact.html" class="text-secondary nav-link-hover font-medium transition duration-300 rounded-lg px-3 py-2">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-secondary hover:text-main-accent focus:outline-none rounded-lg p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-2 py-2 shadow-lg rounded-b-lg">
+            <a href="index.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Home</a>
+            <a href="about_us.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">About Us</a>
+
+            <div class="relative w-full">
+                <button class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2 w-full text-left flex justify-between items-center" id="mobile-poses-dropdown-toggle">
+                    Poses
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+               <div class="mobile-dropdown-menu hidden bg-gray-50 py-2 rounded-lg mx-4 mt-1">
+                    <a href="./poses_by_type.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Type</a>
+                    <a href="./poses_by_benefit.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Benefit</a>
+                    <a href="./general_poses.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">General Poses</a>
+                    <a href="./poses_by_anatomy.html" class="block px-6 py-2 text-secondary hover:bg-gray-100 rounded-lg mx-2">By Anatomy</a>
+                </div>
+            </div>
+            <a href="courses.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Courses</a>
+            <a href="meditation.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Meditation</a>
+            <a href="videos.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Videos</a>
+            <a href="books.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Books</a>
+            <a href="contact.html" class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-lg mx-2">Contact</a>
+        </div>
+    </header>
+
+    <main class="animate-fade-in">
+        <!-- Hero Section for Meditation Page -->
+        <section class="meditation-hero-background h-64 flex items-center justify-center text-center px-4 py-10 bg-cover bg-center rounded-b-2xl">
+            <div class="bg-black bg-opacity-50 p-6 rounded-xl max-w-xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight animate-slide-up-fade">
+                    Cultivate Inner Peace The Art of Meditation
+                </h1>
+            </div>
+        </section>
+
+        <!-- What is Meditation? Section -->
+        <section class="py-16 section-bg-light container mx-auto px-4 rounded-xl shadow-lg mt-8 mb-8">
+            <div class="max-w-4xl mx-auto text-center content-section">
+                <h2 class="text-4xl font-bold text-primary mb-8 initial-hidden" data-animate="slide-up-fade">What is Meditation?</h2>
+                <img src="./assets/images/mrditation.jpg" alt="Person meditating" class="content-image mx-auto mb-8 initial-hidden" data-animate="bounce-in">
+                <p class="text-lg text-secondary leading-relaxed mb-6 initial-hidden" data-animate="slide-up-fade">
+                    Meditation is a practice where an individual uses a technique – such as mindfulness, or focusing the mind on a particular object, thought, or activity – to train attention and awareness, and achieve a mentally clear and emotionally calm and stable state.
+                </p>
+                <p class="text-lg text-secondary leading-relaxed initial-hidden" data-animate="slide-up-fade">
+                    It's not about stopping your thoughts, but rather observing them without judgment. Regular meditation can lead to profound changes in your brain and overall well-being.
+                </p>
+            </div>
+        </section>
+
+        <!-- Benefits of Meditation Section -->
+        <section class="py-16 section-bg-accent container mx-auto px-4 rounded-xl shadow-lg mb-8">
+            <div class="max-w-6xl mx-auto text-center content-section">
+                <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade">Benefits of Meditation</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.1s;">
+                        <i class="fas fa-brain main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-2">Reduces Stress & Anxiety</h3>
+                        <p class="text-secondary text-sm">Lowers cortisol levels and promotes relaxation responses.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.2s;">
+                        <i class="fas fa-moon main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-2">Improves Sleep</h3>
+                        <p class="text-secondary text-sm">Calms the mind, making it easier to fall and stay asleep.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.3s;">
+                        <i class="fas fa-lightbulb main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-2">Enhances Focus & Attention</h3>
+                        <p class="text-secondary text-sm">Trains the brain to sustain attention and reduce distractions.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.4s;">
+                        <i class="fas fa-hand-holding-heart main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-2">Fosters Emotional Health</h3>
+                        <p class="text-secondary text-sm">Increases self-awareness and capacity for compassion.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.5s;">
+                        <i class="fas fa-grin main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-2">Boosts Happiness</h3>
+                        <p class="text-secondary text-sm">Cultivates positive emotions and life satisfaction.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.6s;">
+                        <i class="fas fa-heart main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-2">Supports Physical Health</h3>
+                        <p class="text-secondary text-sm">May lower blood pressure and improve immune function.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Different Types of Meditation Section -->
+        <section class="py-16 section-bg-light container mx-auto px-4 rounded-xl shadow-lg mb-8">
+            <div class="max-w-4xl mx-auto content-section">
+                <h2 class="text-4xl font-bold text-primary text-center mb-10 initial-hidden" data-animate="slide-up-fade">Different Types of Meditation</h2>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+                    <!-- Type 1: Guided Meditation -->
+                    <div class="flex flex-col md:flex-row items-center bg-white p-8 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.1s; box-shadow: 0 4px 15px rgba(36, 230, 10, 0.884)">
+                        <img src="https://media.istockphoto.com/id/1483989816/photo/adult-arab-male-with-a-ponytail-meditating-in-a-yoga-class.jpg?s=612x612&w=0&k=20&c=FTkO8dit_ZWB_9mUk2bmkELm2mpC-NqH82nCmK1Wx6M=" alt="Guided Meditation" class="content-image md:w-1/3 md:mr-8 mb-6 md:mb-0 animate-bounce-in">
+                        <div class="md:w-2/3 text-center md:text-left">
+                            <h3 class="text-2xl font-semibold text-primary mb-3 initial-hidden animate-slide-up-fade">Guided Meditation</h3>
+                            <p class="text-secondary leading-relaxed initial-hidden animate-slide-up-fade">
+                                In guided meditation, an instructor leads you through the practice, often focusing on breath, body scans, or visualization. It's excellent for beginners to establish a routine.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Type 2: Transcendental Meditation -->
+                    <div class="flex flex-col md:flex-row items-center bg-white p-8 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.3s;box-shadow: 0 4px 15px rgba(36, 230, 10, 0.884)"">
+                        <img src="https://realhappiness.org/images/what-is-transcendental-meditation.jpg" alt="Transcendental Meditation" class="content-image md:w-1/3 md:mr-8 mb-6 md:mb-0 order-first md:order-last animate-bounce-in">
+                        <div class="md:w-2/3 text-center md:text-left">
+                            <h3 class="text-2xl font-semibold text-primary mb-3 initial-hidden animate-slide-up-fade">Transcendental Meditation (TM)</h3>
+                            <p class="text-secondary leading-relaxed initial-hidden animate-slide-up-fade">
+                                TM is a specific form of mantra meditation. Practitioners typically receive a personalized mantra and practice for 15-20 minutes twice a day while sitting comfortably.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Type 3: Mindfulness Meditation -->
+                    <div class="flex flex-col md:flex-row items-center bg-white p-8 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.5s;box-shadow: 0 4px 15px rgba(36, 230, 10, 0.884)"">
+                        <img src="https://media.cnn.com/api/v1/images/stellar/prod/220531190304-woman-meditation-stock.jpg?q=w_1110,c_fill" alt="Mindfulness Meditation" class="content-image md:w-1/3 md:mr-8 mb-6 md:mb-0 animate-bounce-in">
+                        <div class="md:w-2/3 text-center md:text-left">
+                            <h3 class="text-2xl font-semibold text-primary mb-3 initial-hidden animate-slide-up-fade">Mindfulness Meditation</h3>
+                            <p class="text-secondary leading-relaxed initial-hidden animate-slide-up-fade">
+                                Focuses on being present in the moment, observing thoughts, feelings, and sensations without judgment. It can be practiced formally or informally throughout the day.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- When and How to Meditate Section -->
+        <section class="py-16 section-bg-accent container mx-auto px-4 rounded-xl shadow-lg mb-8">
+            <div class="max-w-4xl mx-auto content-section text-center">
+                <h2 class="text-4xl font-bold text-primary mb-10 initial-hidden" data-animate="slide-up-fade">When and How to Meditate</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.1s;">
+                        <i class="fas fa-clock main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-3">When to Meditate</h3>
+                        <ul class="list-disc list-inside text-secondary text-left mx-auto max-w-sm">
+                            <li>Morning: Set a positive tone for the day.</li>
+                            <li>Midday: Re-center and reduce stress.</li>
+                            <li>Evening: Wind down before sleep.</li>
+                            <li>Anytime: Whenever you feel stressed or need a break.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-md initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.2s;">
+                        <i class="fas fa-person-sitting main-accent text-4xl mb-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary mb-3">How to Meditate (Basic Steps)</h3>
+                        <ol class="list-decimal list-inside text-secondary text-left mx-auto max-w-sm">
+                            <li>Find a quiet, comfortable space.</li>
+                            <li>Sit in a comfortable position (chair or floor).</li>
+                            <li>Close your eyes gently or soften your gaze.</li>
+                            <li>Focus on your breath: Notice the sensation of inhales and exhales.</li>
+                            <li>When your mind wanders (it will!), gently bring your attention back to your breath.</li>
+                            <li>Start with 5-10 minutes and gradually increase.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs Section -->
+        <section class="py-16 section-bg-light container mx-auto px-4 rounded-xl shadow-lg mb-8" style="box-shadow: 0 4px 15px rgba(47, 82, 42, 0.884)"">
+            <div class="max-w-4xl mx-auto content-section">
+                <h2 class="text-4xl font-bold text-primary text-center mb-10 initial-hidden" data-animate="slide-up-fade">Frequently Asked Questions</h2>
+                <!-- FAQ Item 1 -->
+                <div class="mb-4 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.1s;box-shadow: 0 4px 15px rgba(13, 27, 12, 0.884)"">
+                    <button class="faq-toggle w-full flex justify-between items-center bg-gray-50 p-4 rounded-lg font-semibold text-primary hover:bg-gray-100 transition duration-200">
+                        Is meditation a religious practice?
+                        <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white rounded-b-lg shadow-sm text-secondary">
+                        No, while meditation is a component of many religions, it is fundamentally a secular practice of training the mind and can be practiced by anyone, regardless of their beliefs.
+                    </div>
+                </div>
+                <!-- FAQ Item 2 -->
+                <div class="mb-4 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.2s;box-shadow: 0 4px 15px rgba(18, 37, 15, 0.884)"">
+                    <button class="faq-toggle w-full flex justify-between items-center bg-gray-50 p-4 rounded-lg font-semibold text-primary hover:bg-gray-100 transition duration-200">
+                        How long should I meditate for?
+                        <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white rounded-b-lg shadow-sm text-secondary">
+                        Even 5-10 minutes a day can yield benefits. Consistency is more important than duration, so start with what feels manageable and gradually increase as you feel comfortable.
+                    </div>
+                </div>
+                <!-- FAQ Item 3 -->
+                <div class="mb-4 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.3s;box-shadow: 0 4px 15px rgba(50, 92, 45, 0.884)"">
+                    <button class="faq-toggle w-full flex justify-between items-center bg-gray-50 p-4 rounded-lg font-semibold text-primary hover:bg-gray-100 transition duration-200">
+                        What if my mind keeps wandering?
+                        <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white rounded-b-lg shadow-sm text-secondary">
+                        It's completely normal for your mind to wander during meditation. The practice isn't about stopping thoughts, but gently noticing when your mind has strayed and bringing your attention back to your anchor (like your breath). This act of returning is the core of the practice.
+                    </div>
+                </div>
+                <!-- FAQ Item 4 -->
+                <div class="mb-4 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.3s;box-shadow: 0 4px 15px rgba(45, 83, 39, 0.884)"">
+                    <button class="faq-toggle w-full flex justify-between items-center bg-gray-50 p-4 rounded-lg font-semibold text-primary hover:bg-gray-100 transition duration-200">
+                        Is aerobic exercise good for weight loss?
+                        <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white rounded-b-lg shadow-sm text-secondary">
+                        Yes, aerobic exercise is excellent for weight loss as it burns calories, which is crucial for creating a calorie deficit when combined with a balanced diet.                    </div>
+                </div>
+                 <!-- FAQ Item 5 -->
+                <div class="mb-4 initial-hidden" data-animate="slide-up-fade" style="animation-delay: 0.3s;box-shadow: 0 4px 15px rgba(40, 75, 36, 0.884)"">
+                    <button class="faq-toggle w-full flex justify-between items-center bg-gray-50 p-4 rounded-lg font-semibold text-primary hover:bg-gray-100 transition duration-200">
+                        Do I need to be fit to start aerobics?
+                        <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 bg-white rounded-b-lg shadow-sm text-secondary">
+                        No, aerobic exercise is adaptable to all fitness levels; you can start with low-impact activities and gradually increase intensity as your fitness improves.                   </div>
+                </div>               
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Copied from index.html -->
+    <footer class="footer-bg py-8 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center md:flex md:justify-between md:items-center">
+            <p class="mb-4 md:mb-0">&copy; 2023 Healthy Mind. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition duration-300 footer-link-hover">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle - Copied from other pages
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobile Poses Dropdown Toggle - Copied from other pages
+        const mobilePosesDropdownToggle = document.getElementById('mobile-poses-dropdown-toggle');
+        const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+
+        if (mobilePosesDropdownToggle && mobileDropdownMenu) {
+            mobilePosesDropdownToggle.addEventListener('click', () => {
+                mobileDropdownMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Close mobile menu when a link is clicked - Copied from other pages
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Handle desktop dropdown hover/click state (for accessibility) - Copied from other pages
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            const dropdownButton = dropdown.querySelector('button');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+            if (dropdownButton) {
+                dropdownButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!dropdown.contains(event.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+
+                // Close other open FAQs
+                document.querySelectorAll('.faq-content').forEach(otherContent => {
+                    if (otherContent !== content && !otherContent.classList.contains('hidden')) {
+                        otherContent.classList.add('hidden');
+                        otherContent.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle current FAQ
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+
+        // Function to handle animations on scroll using Intersection Observer
+        const animateOnScroll = () => {
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const animationType = element.dataset.animate;
+
+                        // Apply animation class based on data-animate attribute
+                        if (animationType === 'slide-up-fade') {
+                            element.classList.add('animate-slide-up-fade');
+                        } else if (animationType === 'bounce-in') {
+                             element.classList.add('animate-bounce-in');
+                        }
+
+                        // Also animate children if the parent section comes into view
+                        element.querySelectorAll('[data-animate]').forEach(child => {
+                            if (child.dataset.animate === 'slide-up-fade') {
+                                child.classList.add('animate-slide-up-fade');
+                            } else if (child.dataset.animate === 'bounce-in') {
+                                child.classList.add('animate-bounce-in');
+                            }
+                            child.classList.remove('initial-hidden');
+                        });
+
+
+                        element.classList.remove('initial-hidden'); // Remove the initial hidden state
+                        observer.unobserve(element); // Stop observing once the element has animated
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with the 'data-animate' attribute
+            document.querySelectorAll('[data-animate]').forEach(element => {
+                observer.observe(element);
+            });
+        };
+
+        // Call the animation function when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
